@@ -8,11 +8,11 @@ The latest version of Medium Editor bundled by this gem is [v2.4.0](https://gith
 
 ## Installation
 
-Include **medium-editor-insert-plugin-rails** in your Rails project's Gemfile:
+Include **medium-editor-insert-plugin** in your Rails project's Gemfile:
 
 ```ruby
 gem 'medium-editor-rails'
-gem 'medium-editor-insert-plugin-rails'
+gem 'medium-editor-insert-plugin'
 ```
 
 And then execute:
@@ -21,6 +21,11 @@ And then execute:
 bundle install
 bundle exec rake insert_plugin:update
 ```
+
+Install engine
+rails medium_editor_insert_plugin:install:migrations
+add to config/routes.rb
+mount MediumEditorInsertPlugin::Engine => "/medium_editor_insert_plugin"
 
 ## Configuration
 
@@ -175,7 +180,7 @@ Restart your app. You must be enable to upload images using `/images/upload` pat
 
 ## Contributing
 
-1. Fork it ( https://github.com/mwlang/medium-editor-insert-plugin-rails/fork )
+1. Fork it ( https://github.com/mwlang/medium-editor-insert-plugin/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

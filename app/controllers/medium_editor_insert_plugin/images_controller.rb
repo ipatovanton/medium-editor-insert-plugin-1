@@ -9,29 +9,24 @@ module MediumEditorInsertPlugin
       @image = Image.new
       @image.file = files[0]
 
-      respond_to do |format|
-        if @image.save
-          format.html { redirect_to @image, notice: 'Image was successfully created.' }
-          format.json do
-            render json: {
-              files:
-                [
-                  {
-                    url: @image.file.url,
-                    thumbnail_url: @image.file.url,
-                    name: @image.file_identifier,
-                    type: "image/jpeg",
-                    size: 0,
-                    delete_url: "http://url.to/delete/file/",
-                    delete_type: "DELETE"
-                  }
-                ]
-            }
-          end
-        else
-          format.html { render :new }
-          format.json { render json: @image.errors, status: :unprocessable_entity }
-        end
+      if @image.save
+        render json: { success: true, files: [{ url: "#{@image.file.url}?id=#{@image.id}" }] }
+      else
+        render json: { success: false, errors:  @image.errors }, status: :unprocessable_entity
+      end
+    end
+
+    # insert-plugin is locked on file path of image and it's hard to pass other params
+    # for now pass id to file path on uploading and get it on deleting
+    def delete
+      file = params.require(:file)
+      id = file.split("?")[1].gsub("id=", "")
+      image = Image.where(id: id).first
+      if image
+        image.destroy
+        render json: { success: true }
+      else
+        render json: { success: false },  status: :not_found
       end
     end
 

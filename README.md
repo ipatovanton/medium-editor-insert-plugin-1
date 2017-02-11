@@ -33,7 +33,7 @@ rake db:migrate
 
 Add to `config/routes.rb`
 ```ruby
-mount MediumEditorInsertPlugin::Engine => "/medium_editor_insert_plugin"
+mount MediumEditorInsertPlugin::Engine => "/medium-editor-insert-plugin"
 ```
 
 ## Configuration

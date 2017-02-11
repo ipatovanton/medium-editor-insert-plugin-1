@@ -22,10 +22,19 @@ bundle install
 bundle exec rake insert_plugin:update
 ```
 
-Install engine
+## Image uploading support
+
+Install engine migrations
+
+```bash
 rails medium_editor_insert_plugin:install:migrations
-add to config/routes.rb
+rake db:migrate
+```
+
+Add to `config/routes.rb`
+```ruby
 mount MediumEditorInsertPlugin::Engine => "/medium_editor_insert_plugin"
+```
 
 ## Configuration
 
@@ -40,15 +49,12 @@ Include stylesheet file in **app/assets/stylesheets/application.css**:
 
 ```css
 /*
-*= require medium-editor/medium-editor
-*= require medium-editor/themes/flat
+*= require medium-editor
 *= require medium-editor-insert-plugin
 */
 ```
 
-## Using Medium Editor with Rails
-
-You need to initialize Medium Editor with any selector of div, example:
+## Using plugin
 
 ```html
 <div class="editable"></div>
@@ -65,6 +71,36 @@ You need to initialize Medium Editor with any selector of div, example:
   });
 </script>
 ```
+
+## Using plugin with image uploading
+
+```html
+<div class="editable"></div>
+
+<script>
+  $(document).ready(function(){
+    var editor = new MediumEditor('.editable', {
+      // options go here
+    });
+
+    $('.editable').mediumInsert({
+      editor: editor,
+      addons: {
+        images: {
+          fileUploadOptions: {
+            url: '/medium-editor-insert-plugin/images/upload',
+            acceptFileTypes: /(.|\/)(gif|jpe?g|png)$/i
+          },
+
+          fileDeleteOptions: {
+            url: '/medium-editor-insert-plugin/images/delete',
+          }
+        }
+      }
+    });
+
+  });
+</script>
 
 ## Handle image uploading
 

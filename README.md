@@ -1,4 +1,4 @@
-# Insert Plugin for Rails
+# Medium Editor Insert Plugin for Rails
 
 This gem integrates [Medium Editor Insert Plugin](https://github.com/orthes/medium-editor-insert-plugin) with Rails asset pipeline.
 

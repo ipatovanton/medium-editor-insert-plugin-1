@@ -11,7 +11,7 @@ The latest version of Medium Editor bundled by this gem is [v2.4.0](https://gith
 Include **medium-editor-insert-plugin** in your Rails project's Gemfile:
 
 ```ruby
-gem 'medium-editor-rails'
+gem 'medium-editor'
 gem 'medium-editor-insert-plugin'
 ```
 

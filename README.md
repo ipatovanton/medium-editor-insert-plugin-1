@@ -19,7 +19,6 @@ And then execute:
 
 ```bash
 bundle install
-bundle exec rake insert_plugin:update
 ```
 
 ## Image uploading support
@@ -132,7 +131,7 @@ If your application has its own image uploading endpoint on `/images/upload`, pl
   });
 </script>
 ```
-When upload path isn't specified, plugin stores image as binary data inside text.
+When upload path isn't specified, plugin stores image as binary data inside the text.
 
 ## Contributing
 

@@ -101,6 +101,7 @@ Include stylesheet file in **app/assets/stylesheets/application.css**:
 
   });
 </script>
+```
 
 ## Handle image uploading
 

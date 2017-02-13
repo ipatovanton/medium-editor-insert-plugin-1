@@ -35,6 +35,7 @@ Add to `config/routes.rb`
 ```ruby
 mount MediumEditorInsertPlugin::Engine => "/medium-editor-insert-plugin"
 ```
+You can skip this step, if your application has its own image uploader resource.
 
 ## Configuration
 
@@ -54,7 +55,7 @@ Include stylesheet file in **app/assets/stylesheets/application.css**:
 */
 ```
 
-## Using plugin
+Initialize and configure the plugin
 
 ```html
 <div class="editable"></div>
@@ -72,7 +73,7 @@ Include stylesheet file in **app/assets/stylesheets/application.css**:
 </script>
 ```
 
-## Using plugin with image uploading
+Configure image uploading
 
 ```html
 <div class="editable"></div>

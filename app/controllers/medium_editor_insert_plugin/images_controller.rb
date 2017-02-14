@@ -4,7 +4,7 @@ module MediumEditorInsertPlugin
   class ImagesController < ApplicationController
 
     def upload
-      @image ||= build_image
+      @image = build_image
       @image.file = image_file
 
       if @image.save
@@ -17,7 +17,7 @@ module MediumEditorInsertPlugin
     # insert-plugin is locked on file path of image and it's hard to pass other params
     # for now pass id to file path on uploading and get it on deleting
     def delete
-      @image ||= find_image
+      @image = find_image
       @image.destroy
       render json: { success: true }
     end

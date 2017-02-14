@@ -4,10 +4,8 @@ module MediumEditorInsertPlugin
   class ImagesController < ApplicationController
 
     def upload
-      files = params.require(:files)
-
-      @image = Image.new
-      @image.file = files[0]
+      @image ||= build_image
+      @image.file = image_file
 
       if @image.save
         render json: { success: true, files: [{ url: "#{@image.file.url}?id=#{@image.id}" }] }
@@ -19,15 +17,29 @@ module MediumEditorInsertPlugin
     # insert-plugin is locked on file path of image and it's hard to pass other params
     # for now pass id to file path on uploading and get it on deleting
     def delete
+      @image ||= find_image
+      @image.destroy
+      render json: { success: true }
+    end
+
+    protected
+
+    def build_image
+      Image.new
+    end
+
+    def find_image
+      Image.find image_id
+    end
+
+    def image_id
       file = params.require(:file)
-      id = file.split("?")[1].gsub("id=", "")
-      image = Image.where(id: id).first
-      if image
-        image.destroy
-        render json: { success: true }
-      else
-        render json: { success: false },  status: :not_found
-      end
+      file.split("?")[1].to_s.gsub("id=", "")
+    end
+
+    def image_file
+      files = params.require(:files)
+      files[0]
     end
 
   end
